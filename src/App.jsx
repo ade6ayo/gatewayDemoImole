@@ -66,18 +66,18 @@ const detectNigerianNetwork = (phone) => {
 
 // ─── NIGERIA NEWS HEADLINES (card widget) ─────────────────────────────────────
 const NIGERIA_NEWS_HEADLINES = [
-    "Ogun APC caucus endorses Tinubu, Abiodun & Adeola for 2027 governorship",
-    "Senate Leader rallies Ogun West professionals for Tinubu & Adeola",
-    "2027: Ogun West professionals adopt Tinubu, Senator Adeola at Abeokuta rally",
-    "Senator Adeola, NIS host grassroots soccer clinic for Ogun youth",
-    "Senate launches public hearing on 2026 budget — 'from budget to impact'",
-    "Ogun 2027: Beyond power rotation to Adeola's economic vision",
-    "Super Eagles make bold transfer moves ahead of AFCON 2026",
-    "Naira strengthens against dollar in official FX market — CBN data",
-    "NELFUND records 1.6M student loan applications, 983K beneficiaries so far",
-    "FG launches Nigeria Industrial Policy 2025 to diversify beyond oil",
-    "Troops neutralise kidnappers, rescue abducted woman in Plateau State",
-    "2027: Cross River APC pledges 1.5M votes for President Tinubu",
+    "Osun APC endorses Governor Adeleke's development agenda for 2027 continuity",
+    "Osun 2027: Stakeholders rally support for Senator Kola Balogun in Ife East",
+    "Osun State government commissions new road projects across 10 LGAs",
+    "Osun students benefit from free WAEC registration under new state policy",
+    "Heritage Festival: Ile-Ife prepares for annual Olojo celebration in grand style",
+    "Osun SUBEB records highest primary school enrollment in Southwest — report",
+    "Gov Adeleke flags off Osogbo urban renewal and drainage rehabilitation project",
+    "Osun farmers receive ₦500M agricultural input support from state government",
+    "New judicial complex commissioned in Osogbo to decongest court backlog",
+    "Osun tertiary institutions to benefit from FG's TETFUND intervention — minister",
+    "Security operatives neutralise kidnappers, rescue victims along Ife-Ibadan road",
+    "2027: Osun PDP stakeholders meet in Osogbo to strategise ahead of governorship",
 ];
 
 const NewsCardWidget = React.memo(() => {
@@ -302,7 +302,7 @@ const AnimatedBanner = React.memo(() => (
         <div style={bannerStyles.animatedBanner}>
             <div style={bannerStyles.bannerContent}>
                 <div style={bannerStyles.bannerInner}>
-                    {[...Array(8)].map((_, i) => <span key={i}>  Powered by Ogun Ma YaYi Strategic Group " YaYI 2027 </span>)}
+                    {[...Array(8)].map((_, i) => <span key={i}>  Powered by DAVIDO </span>)}
                 </div>
             </div>
         </div>
@@ -341,11 +341,11 @@ const Confetti = () => {
 
 const QUESTIONS_DATABASE = {
     nigerian: [
-        { id: 1, question: "Ogun State is famously known as the 'Gateway State' because:", options: ['It has the largest airport in West Africa.', 'It is the primary land route connecting Lagos to the rest of Nigeria and West Africa.', 'It was the first state to be created in Nigeria.', 'It is the only state with a sea port in the Southwest.'], correct: 1, difficulty: 'easy', category: '.' },
-        { id: 2, question: "Which iconic natural landmark in Abeokuta served as a fortress for the Egba people during the 19th-century wars?", options: ['Idanre Hills', 'Zuma Rock', 'Olumo Rock', 'Aso Rock'], correct: 2, difficulty: 'medium', category: '.' }
+        { id: 1, question: "Which major infrastructure project was recently completed to ease traffic at the Okefia intersection in Osogbo?", options: [' Olaiya Flyover', 'Okefia Flyover', 'Lameco Bypass', 'Akoda Road Expansion'], correct: 1, difficulty: 'easy', category: 'Osun' },
+        { id: 2, question: "Under the Imole 100 Billion Naira Infrastructure Plan, how many boreholes were commissioned across the state's wards?", options: ['150', '250', '300', '332'], correct: 3, difficulty: 'easy', category: 'Osun' }
     ],
     worldwide: [
-        { id: 3, question: "Senator Solomon Olamilekan Adeola (YAYI) currently serves as the Chairman of which influential Senate Committee?", options: ['Committee on Finance', 'Committee on Appropriations', 'Committee on Public Accounts', 'Committee on Works'], correct: 1, difficulty: 'easy', category: 'Science' },
+        { id: 3, question: "Osun State recently climbed from 33rd to which position in the national education performance rankings?", options: ['15th', '10th', '7th', '3rd'], correct: 2, difficulty: 'easy', category: 'Osun' },
     ]
 };
 
@@ -777,10 +777,24 @@ const QuizIQGame = () => {
         if (!isPresenterMode()) return;
         if (!playerName.trim()) { alert("Please enter a player name first!"); return; }
         const allSets = importedQuestions.sets || [];
-        if (allSets.length === 0) { alert("No custom question sets found! Import some CSVs first."); return; }
+
+        // No custom sets — fall back to default stock questions
+        if (allSets.length === 0) {
+            setCurrentQuestions(getDefaultQuestions().slice(0, GAME_CONFIG.totalQuestions));
+            setSelectedCategory('default');
+            setCurrentQuestion(0); setScore(0); setSelectedAnswer(null); setShowResult(false);
+            setTimeLeft(GAME_CONFIG.timePerQuestion); setIsTimerRunning(false);
+            setLifelinesUsed({ fiftyFifty: false, askAudience: false, phoneAFriend: false });
+            setEliminatedOptions([]); setGameState('playing');
+            setTimeout(() => setIsTimerRunning(true), 10000);
+            return;
+        }
+
         const unplayedSets = allSets.filter(set => !playedSetIds.includes(set.id));
+        // All sets exhausted — reset history and replay from the top
         if (unplayedSets.length === 0) {
-            if (window.confirm("You've played all available sets! \n\nClear history and start over?")) { setPlayedSetIds([]); setTimeout(() => playNextUnplayedSet(), 100); }
+            setPlayedSetIds([]);
+            setTimeout(() => playNextUnplayedSet(), 100);
             return;
         }
         const randomSet = unplayedSets[Math.floor(Math.random() * unplayedSets.length)];
@@ -791,6 +805,7 @@ const QuizIQGame = () => {
         setTimeLeft(GAME_CONFIG.timePerQuestion); setIsTimerRunning(false);
         setLifelinesUsed({ fiftyFifty: false, askAudience: false, phoneAFriend: false });
         setEliminatedOptions([]); setGameState('playing');
+        setTimeout(() => setIsTimerRunning(true), 10000);
     };
 
     const resetGame = () => {
@@ -873,7 +888,7 @@ const QuizIQGame = () => {
     // ── Styles ────────────────────────────────────────────────────────────────
     const styles = {
         // paddingTop on mobile accounts for the fixed status bar height
-        container: { width: '100vw', minHeight: '100vh', height: 'auto', overflowX: 'hidden', overflowY: 'auto', background: LUXURY_THEME.primary, padding: isMobile ? `${MOBILE_STATUS_BAR_HEIGHT + 10}px 10px 80px 10px` : '2vh 2vw 70px 2vw', boxSizing: 'border-box', fontFamily: "'Product Sans', 'Georgia', serif", position: 'relative', color: LUXURY_THEME.text, display: 'flex', flexDirection: 'column' },
+        container: { width: '100vw', minHeight: '100vh', height: 'auto', overflowX: 'hidden', overflowY: 'auto', background: isMobile ? 'url(/gatewayDemoImole/bg2.png) center center / cover no-repeat fixed' : 'url(/gatewayDemoImole/bg.png) center center / cover no-repeat fixed', padding: isMobile ? `${MOBILE_STATUS_BAR_HEIGHT + 10}px 10px 80px 10px` : '2vh 2vw 70px 2vw', boxSizing: 'border-box', fontFamily: "'Product Sans', 'Georgia', serif", position: 'relative', color: LUXURY_THEME.text, display: 'flex', flexDirection: 'column' },
         centerArea: { maxWidth: isMobile ? '100%' : '90vw', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'stretch' },
         header: { display: 'flex', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', flexDirection: isMobile ? 'column' : 'row', gap: 12, flexWrap: 'wrap' },
         lifelineBar: { display: 'flex', gap: 12, alignItems: 'center', justifyContent: 'center', marginTop: '1vh', flexWrap: 'wrap' },
@@ -899,43 +914,59 @@ const QuizIQGame = () => {
                     <div style={styles.header}>
                         <div><img src={xxvLogo} alt="XXV Logo" style={{ width: isMobile ? 90 : 150, height: isMobile ? 90 : 150, objectFit: 'contain' }} /></div>
                     </div>
-                    <div style={{ ...styles.card, maxWidth: 600, marginTop: isMobile ? '16px' : '32px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}>
+                    <div style={{ ...styles.card, maxWidth: 600, marginTop: isMobile ? '30vh' : '32px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}>
                         <h3 style={{ color: LUXURY_THEME.textGold }}>Enter Player Name</h3>
                         <input autoFocus type="text" placeholder="Player name..." value={playerName}
                                onChange={(e) => setPlayerName(e.target.value)}
-                               onKeyDown={(e) => e.key === 'Enter' && playerName.trim() && setGameState('category-selection')}
-                               style={{ width: 'auto', padding: '20px 30px', borderRadius: 10, border: `1px solid ${LUXURY_THEME.border}`, backgroundColor: 'rgba(0,0,0,0.45)', color: LUXURY_THEME.text, fontSize: 16, marginTop: -2, marginBottom: 12 }}
+                               onKeyDown={(e) => {
+                                   if (e.key === 'Enter' && playerName.trim()) {
+                                       const questions = getQuestionsForCategory('default').slice(0, GAME_CONFIG.totalQuestions);
+                                       setSelectedCategory('default');
+                                       setCurrentQuestions(questions);
+                                       setCurrentQuestion(0); setScore(0); setSelectedAnswer(null);
+                                       setShowResult(false); setTimeLeft(GAME_CONFIG.timePerQuestion);
+                                       setIsTimerRunning(false);
+                                       setLifelinesUsed({ fiftyFifty: false, askAudience: false, phoneAFriend: false });
+                                       setEliminatedOptions([]); setAudiencePoll(null);
+                                       setGameState('playing');
+                                       setTimeout(() => setIsTimerRunning(true), 10000);
+                                   }
+                               }}
+                               style={{ width: '100%', boxSizing: 'border-box', padding: '14px 18px', borderRadius: 10, border: `1px solid ${LUXURY_THEME.border}`, backgroundColor: 'rgba(0,0,0,0.45)', color: LUXURY_THEME.text, fontSize: 16, marginTop: -2, marginBottom: 16 }}
                         />
-                        <div style={{ display: 'flex', gap: 12 }}>
-                            <button
-                                onClick={() => {
-                                    if (playerName.trim()) {
-                                        const questions = getQuestionsForCategory('default').slice(0, GAME_CONFIG.totalQuestions);
-                                        setSelectedCategory('default');
-                                        setCurrentQuestions(questions);
-                                        setCurrentQuestion(0); setScore(0); setSelectedAnswer(null);
-                                        setShowResult(false); setTimeLeft(GAME_CONFIG.timePerQuestion);
-                                        setIsTimerRunning(false);
-                                        setLifelinesUsed({ fiftyFifty: false, askAudience: false, phoneAFriend: false });
-                                        setEliminatedOptions([]); setAudiencePoll(null);
-                                        setGameState('playing');
-                                        setTimeout(() => setIsTimerRunning(true), 10000);
-                                    }
-                                }}
-                                disabled={!playerName.trim()}
-                                style={{
-                                    flex: 1,
-                                    padding: '12px 14px',
-                                    borderRadius: 10,
-                                    background: 'linear-gradient(90deg,#ffd700,#ffb347)',
-                                    border: 'none',
-                                    cursor: playerName.trim() ? 'pointer' : 'not-allowed',
-                                    fontWeight: 700
-                                }}
-                            >
-                                Start Game
-                            </button>
-                        </div>
+                        <button
+                            onClick={() => {
+                                if (playerName.trim()) {
+                                    const questions = getQuestionsForCategory('default').slice(0, GAME_CONFIG.totalQuestions);
+                                    setSelectedCategory('default');
+                                    setCurrentQuestions(questions);
+                                    setCurrentQuestion(0); setScore(0); setSelectedAnswer(null);
+                                    setShowResult(false); setTimeLeft(GAME_CONFIG.timePerQuestion);
+                                    setIsTimerRunning(false);
+                                    setLifelinesUsed({ fiftyFifty: false, askAudience: false, phoneAFriend: false });
+                                    setEliminatedOptions([]); setAudiencePoll(null);
+                                    setGameState('playing');
+                                    setTimeout(() => setIsTimerRunning(true), 10000);
+                                }
+                            }}
+                            disabled={!playerName.trim()}
+                            style={{
+                                display: 'block',
+                                width: isMobile ? '100%' : 'auto',
+                                padding: '12px 36px',
+                                borderRadius: 10,
+                                background: playerName.trim() ? 'linear-gradient(90deg,#ffd700,#ffb347)' : 'rgba(255,255,255,0.08)',
+                                border: 'none',
+                                cursor: playerName.trim() ? 'pointer' : 'not-allowed',
+                                fontWeight: 700,
+                                fontSize: '1rem',
+                                color: playerName.trim() ? '#1a1a1a' : 'rgba(255,255,255,0.3)',
+                                margin: '0 auto',
+                                transition: 'all 0.2s ease',
+                            }}
+                        >
+                            Start Game →
+                        </button>
                     </div>
                 </div>
                 {!isPresenterMode() && (
@@ -1092,35 +1123,35 @@ const QuizIQGame = () => {
                 <BounceKeyframes />
                 <div style={styles.centerArea}>
                     <div style={styles.header}>
-                        <div>
-                            <h1 style={{ margin: 0, fontSize: '1.6rem', background: LUXURY_THEME.secondary, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Question {currentQuestion + 1} / {currentQuestions.length}</h1>
-                            <div style={{ color: 'rgba(255,255,255,0.9)' }}>{playerName} • Score: {GAME_CONFIG.currency}{score}</div>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
-                            <div style={styles.lifelineBar}>
-                                <div title="50/50" onClick={() => isPresenterMode() && handleFiftyFifty()} style={{ ...styles.lifelineBtn(lifelinesUsed.fiftyFifty), cursor: !isPresenterMode() || lifelinesUsed.fiftyFifty ? 'not-allowed' : 'pointer' }}>
-                                    <Scissors size={18} /> <span>50/50</span>
-                                </div>
-                                <div title="Ask Audience" onClick={() => isPresenterMode() && handleAskAudience()} style={{ ...styles.lifelineBtn(lifelinesUsed.askAudience), cursor: !isPresenterMode() || lifelinesUsed.askAudience ? 'not-allowed' : 'pointer' }}>
-                                    <Users size={18} /> <span>Ask Audience</span>
-                                </div>
-                                <div title="Phone a Friend" onClick={() => isPresenterMode() && handlePhoneAFriend()} style={{ ...styles.lifelineBtn(lifelinesUsed.phoneAFriend), cursor: !isPresenterMode() || lifelinesUsed.phoneAFriend ? 'not-allowed' : 'pointer' }}>
-                                    <Phone size={18} /> <span>Phone a Friend</span>
-                                </div>
-                            </div>
-                        </div>
-                        {isPresenterMode() && (
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                            <img src={xxvLogo} alt="XXV" style={{ width: isMobile ? 50 : 70, height: isMobile ? 50 : 70, objectFit: 'contain', flexShrink: 0 }} />
                             <div>
+                                <h1 style={{ margin: 0, fontSize: '1.5rem', background: LUXURY_THEME.secondary, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Question {currentQuestion + 1} / {currentQuestions.length}</h1>
+                                <div style={{ color: 'rgba(255,255,255,0.9)' }}>{playerName} • Score: {GAME_CONFIG.currency}{score}</div>
+                            </div>
+                            {isPresenterMode() && (
                                 <button
-                                    onClick={() => {
-                                        if (window.confirm('Are you sure you want to exit the current game? All progress will be lost.')) {
-                                            resetGame();
-                                        }
-                                    }}
-                                    style={{ padding: '8px 16px', borderRadius: 8, background: 'rgba(255,0,0,0.1)', border: '1px solid rgba(255,0,0,0.4)', color: '#ff6b8a', cursor: 'pointer', fontWeight: 600 }}
+                                    onClick={() => resetGame()}
+                                    style={{ marginLeft: 8, padding: '6px 12px', borderRadius: 8, background: 'rgba(255,0,0,0.1)', border: '1px solid rgba(255,0,0,0.4)', color: '#ff6b8a', cursor: 'pointer', fontWeight: 600, whiteSpace: 'nowrap' }}
                                 >
                                     Exit Game
                                 </button>
+                            )}
+                        </div>
+                        {/* ── Lifelines: desktop only ── */}
+                        {!isMobile && (
+                            <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+                                <div style={styles.lifelineBar}>
+                                    <div title="50/50" onClick={() => isPresenterMode() && handleFiftyFifty()} style={{ ...styles.lifelineBtn(lifelinesUsed.fiftyFifty), cursor: !isPresenterMode() || lifelinesUsed.fiftyFifty ? 'not-allowed' : 'pointer' }}>
+                                        <Scissors size={18} /> <span>50/50</span>
+                                    </div>
+                                    <div title="Ask Audience" onClick={() => isPresenterMode() && handleAskAudience()} style={{ ...styles.lifelineBtn(lifelinesUsed.askAudience), cursor: !isPresenterMode() || lifelinesUsed.askAudience ? 'not-allowed' : 'pointer' }}>
+                                        <Users size={18} /> <span>Ask Audience</span>
+                                    </div>
+                                    <div title="Phone a Friend" onClick={() => isPresenterMode() && handlePhoneAFriend()} style={{ ...styles.lifelineBtn(lifelinesUsed.phoneAFriend), cursor: !isPresenterMode() || lifelinesUsed.phoneAFriend ? 'not-allowed' : 'pointer' }}>
+                                        <Phone size={18} /> <span>Phone a Friend</span>
+                                    </div>
+                                </div>
                             </div>
                         )}
                     </div>
@@ -1191,9 +1222,11 @@ const QuizIQGame = () => {
                                 </div>
                             </div>
                         </div>
+                        {/* ── Right sidebar: News first on mobile, Prize Ladder always last ── */}
                         <div style={styles.rightSide}>
+                            {isMobile && <div style={{ marginBottom: 12 }}><NewsCardWidget /></div>}
                             <PrizeLadder currentQuestion={currentQuestion} score={score} safetyNets={GAME_CONFIG.safetyNets} prizeStructure={GAME_CONFIG.prizeStructure} currency={GAME_CONFIG.currency} />
-                            <div style={{ marginTop: 12 }}><NewsCardWidget /></div>
+                            {!isMobile && <div style={{ marginTop: 12 }}><NewsCardWidget /></div>}
                         </div>
                     </div>
                 </div>
@@ -1435,7 +1468,7 @@ const QuizIQGame = () => {
                                style={{ width: 'auto', padding: '20px 30px', borderRadius: 10, border: `1px solid ${LUXURY_THEME.border}`, backgroundColor: 'rgba(0,0,0,0.45)', color: LUXURY_THEME.text, fontSize: 16, marginTop: -2, marginBottom: 12 }}
                         />
                         <div style={{ display: 'flex', gap: 12 }}>
-                            <button onClick={() => { if (!isPresenterMode()) return; setPlayerName(''); playNextUnplayedSet(); }} disabled={!playerName.trim()}
+                            <button onClick={() => { if (!isPresenterMode()) return; playNextUnplayedSet(); }} disabled={!playerName.trim()}
                                     style={{ flex: 1, padding: '12px 14px', borderRadius: 10, background: 'linear-gradient(90deg,#ffd700,#ffb347)', border: 'none', cursor: playerName.trim() ? 'pointer' : 'not-allowed', fontWeight: 700 }}>
                                 Proceed to Next Game
                             </button>
