@@ -120,7 +120,7 @@ Error generating stack: `+l.message+`
             100% { transform: translateX(-50%); }
         }
         ${x1}
-    `})),va=an.memo(()=>f.jsxs(f.Fragment,{children:[f.jsx(A1,{}),f.jsx("div",{style:Qf.animatedBanner,children:f.jsx("div",{style:Qf.bannerContent,children:f.jsx("div",{style:Qf.bannerInner,children:[...Array(8)].map((j,C)=>f.jsx("span",{children:"  Powered by DAVIDO "},C))})})})]})),Cd=an.memo(()=>f.jsx("style",{children:`
+    `})),va=an.memo(()=>f.jsxs(f.Fragment,{children:[f.jsx(A1,{}),f.jsx("div",{style:Qf.animatedBanner,children:f.jsx("div",{style:Qf.bannerContent,children:f.jsx("div",{style:Qf.bannerInner,children:[...Array(8)].map((j,C)=>f.jsx("span",{children:"  Powered by DAVIDO Imole Quest "},C))})})})]})),Cd=an.memo(()=>f.jsx("style",{children:`
         @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
         @keyframes slideInBonus { 0% { transform: translateX(-100px); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateX(0); opacity: 1; } }
         @keyframes fadeOut { 0% { opacity: 1; } 100% { opacity: 0; } }
