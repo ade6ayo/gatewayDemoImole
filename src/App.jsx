@@ -888,7 +888,7 @@ const QuizIQGame = () => {
     // ── Styles ────────────────────────────────────────────────────────────────
     const styles = {
         // paddingTop on mobile accounts for the fixed status bar height
-        container: { width: '100vw', minHeight: '100vh', height: 'auto', overflowX: 'hidden', overflowY: 'auto', background: isMobile ? 'url(/gatewayDemoImole/bg2.png) center center / cover no-repeat fixed' : 'url(/gatewayDemoImole/bg.png) center center / cover no-repeat fixed', padding: isMobile ? `${MOBILE_STATUS_BAR_HEIGHT + 10}px 10px 80px 10px` : '2vh 2vw 70px 2vw', boxSizing: 'border-box', fontFamily: "'Product Sans', 'Georgia', serif", position: 'relative', color: LUXURY_THEME.text, display: 'flex', flexDirection: 'column' },
+        container: { width: '100vw', minHeight: '100vh', height: 'auto', overflowX: 'hidden', overflowY: 'auto', background: isMobile ? 'url(/gatewayDemoImole/bg02.png) center center / cover no-repeat fixed' : 'url(/gatewayDemoImole/bg01.png) center center / cover no-repeat fixed', padding: isMobile ? `${MOBILE_STATUS_BAR_HEIGHT + 10}px 10px 80px 10px` : '2vh 2vw 70px 2vw', boxSizing: 'border-box', fontFamily: "'Product Sans', 'Georgia', serif", position: 'relative', color: LUXURY_THEME.text, display: 'flex', flexDirection: 'column' },
         centerArea: { maxWidth: isMobile ? '100%' : '90vw', margin: '0 auto', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'stretch' },
         header: { display: 'flex', justifyContent: 'space-between', alignItems: isMobile ? 'flex-start' : 'center', flexDirection: isMobile ? 'column' : 'row', gap: 12, flexWrap: 'wrap' },
         lifelineBar: { display: 'flex', gap: 12, alignItems: 'center', justifyContent: 'center', marginTop: '1vh', flexWrap: 'wrap' },
