@@ -302,7 +302,7 @@ const AnimatedBanner = React.memo(() => (
         <div style={bannerStyles.animatedBanner}>
             <div style={bannerStyles.bannerContent}>
                 <div style={bannerStyles.bannerInner}>
-                    {[...Array(8)].map((_, i) => <span key={i}>  Powered by DAVIDO </span>)}
+                    {[...Array(8)].map((_, i) => <span key={i}>  Powered by DAVIDO Imole Quest </span>)}
                 </div>
             </div>
         </div>
