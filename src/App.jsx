@@ -896,7 +896,7 @@ const QuizIQGame = () => {
         mainFlex: { display: 'flex', gap: 22, alignItems: 'stretch', flex: 1, marginTop: '2vh', minHeight: 0, flexDirection: isMobile ? 'column' : 'row' },
         leftMain: { flex: 3, minHeight: 0, display: 'flex', flexDirection: 'column' },
         rightSide: { flex: 1, minWidth: isMobile ? '100%' : '20vw', minHeight: 0, marginTop: isMobile ? '20px' : '0' },
-        card: { backgroundColor: LUXURY_THEME.background, backdropFilter: 'blur(12px)', borderRadius: 16, padding: isMobile ? '15px' : '2vh 2vw', marginBottom: '1vh', border: `2px solid ${LUXURY_THEME.border}`, boxShadow: LUXURY_THEME.shadow, overflow: 'auto' },
+        card: { backgroundColor: LUXURY_THEME.background, backdropFilter: 'blur(12px)', borderRadius: 16, padding: isMobile ? '15px' : '2vh 2vw', marginBottom: '1vh', border: `2px solid ${LUXURY_THEME.border}`, boxShadow: LUXURY_THEME.shadow, overflow: 'auto', boxSizing: 'border-box' },
         questionText: { fontSize: isMobile ? '1.2rem' : 'clamp(1.2rem, 2.5vw, 1.5rem)', marginBottom: '1vh', lineHeight: 1.4 },
         optionBtn: (disabled, selected) => ({ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: isMobile ? '12px' : '1.5vh 2vw', borderRadius: 12, marginBottom: '1vh', cursor: disabled ? 'not-allowed' : 'pointer', background: selected ? 'rgba(212,175,55,0.12)' : 'rgba(0,0,0,0.35)', border: selected ? `2px solid ${LUXURY_THEME.textGold}` : `1px solid rgba(255,255,255,0.06)`, opacity: disabled ? 0.5 : 1, fontSize: isMobile ? '0.95rem' : 'clamp(0.9rem, 1.8vw, 1.1rem)' }),
         timerBar: { height: '1.2vh', borderRadius: 8, background: 'rgba(255,255,255,0.06)', overflow: 'hidden' },
@@ -914,7 +914,7 @@ const QuizIQGame = () => {
                     <div style={styles.header}>
                         <div><img src={xxvLogo} alt="XXV Logo" style={{ width: isMobile ? 90 : 150, height: isMobile ? 90 : 150, objectFit: 'contain' }} /></div>
                     </div>
-                    <div style={{ ...styles.card, maxWidth: 600, marginTop: isMobile ? '30vh' : '32px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}>
+                    <div style={{ ...styles.card, maxWidth: 600, marginTop: isMobile ? '12vh' : '32px', marginLeft: 'auto', marginRight: 'auto', width: '100%' }}>
                         <h3 style={{ color: LUXURY_THEME.textGold }}>Enter Player Name</h3>
                         <input autoFocus type="text" placeholder="Player name..." value={playerName}
                                onChange={(e) => setPlayerName(e.target.value)}
@@ -967,6 +967,30 @@ const QuizIQGame = () => {
                         >
                             Start Game →
                         </button>
+                        <a
+                            href="https://geohunt-production.up.railway.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                                display: 'block',
+                                width: isMobile ? '100%' : 'auto',
+                                padding: '12px 36px',
+                                borderRadius: 10,
+                                background: 'linear-gradient(90deg,#d4af37,#b8860b)',
+                                border: 'none',
+                                cursor: 'pointer',
+                                fontWeight: 700,
+                                fontSize: '1rem',
+                                color: '#1a1a1a',
+                                margin: '12px auto 0',
+                                transition: 'all 0.2s ease',
+                                textAlign: 'center',
+                                textDecoration: 'none',
+                                boxSizing: 'border-box',
+                            }}
+                        >
+                            Go to GeoQuest →
+                        </a>
                     </div>
                 </div>
                 {!isPresenterMode() && (
